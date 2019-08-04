@@ -1,15 +1,18 @@
 package com.nguyenoanh.chats;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.view.ViewPager;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -20,7 +23,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.nguyenoanh.chats.Fragments.ChatFragment;
+import com.nguyenoanh.chats.Fragments.UserFragment;
 import com.nguyenoanh.chats.Model.User;
+
+import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -55,7 +62,7 @@ public class MainActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 userName.setText(user.getUserName());
                 if(user.getInmageURL().equals("default")){
-                    profileImage.setImageResource(R.mipmap.ic_launcher_round);
+                    profileImage.setImageResource(R.drawable.anh1);
                 }else{
                     Glide.with(MainActivity.this).load(user.getInmageURL()).into(profileImage);
                 }
@@ -66,6 +73,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        TabLayout tabLayout = (TabLayout) findViewById (R.id.tab_layout);
+        ViewPager viewPager = (ViewPager) findViewById (R.id.view_pager);
+
+        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter (getSupportFragmentManager ());
+        viewPagerAdapter.addFragment (new ChatFragment (), "Chats");
+        viewPagerAdapter.addFragment (new UserFragment (), "Users");
+
+        viewPager.setAdapter (viewPagerAdapter);
+
+        tabLayout.setupWithViewPager (viewPager);
+
     }
 
     @Override
@@ -83,5 +101,37 @@ public class MainActivity extends AppCompatActivity {
                 return true;
         }
         return false;
+    }
+
+    class ViewPagerAdapter extends FragmentPagerAdapter{
+        private ArrayList<Fragment> fragments;
+        private ArrayList<String> titles;
+
+        ViewPagerAdapter(FragmentManager fragmentManager){
+            super(fragmentManager);
+            this.fragments = new ArrayList<> ();
+            this.titles = new ArrayList<> ();
+        }
+
+        @Override
+        public Fragment getItem(int i) {
+            return fragments.get (i);
+        }
+
+        @Override
+        public int getCount() {
+            return fragments.size ();
+        }
+
+        public void addFragment(Fragment fragment, String title){
+            fragments.add (fragment);
+            titles.add (title);
+        }
+
+        @Nullable
+        @Override
+        public CharSequence getPageTitle(int i) {
+            return titles.get (i);
+        }
     }
 }

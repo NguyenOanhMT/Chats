@@ -21,6 +21,7 @@ public class StartActivity extends AppCompatActivity {
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
+        //check if user is null change activity
         if (firebaseUser != null){
             Intent intent = new Intent(StartActivity.this, MainActivity.class);
             startActivity(intent);
