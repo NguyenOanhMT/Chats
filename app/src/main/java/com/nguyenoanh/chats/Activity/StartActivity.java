@@ -1,4 +1,4 @@
-package com.nguyenoanh.chats;
+package com.nguyenoanh.chats.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.nguyenoanh.chats.R;
 
 public class StartActivity extends AppCompatActivity {
 

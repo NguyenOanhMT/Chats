@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroudregister"
-    tools:context=".Register">
+    tools:context=".Activity.Register">
 
     <include layout="@layout/bar_layout"/>
 

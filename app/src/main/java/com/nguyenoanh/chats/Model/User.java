@@ -3,9 +3,9 @@ package com.nguyenoanh.chats.Model;
 public class User {
     private String id;
     private String userName;
-    private String inmageURL;
+    private int inmageURL;
 
-    public User(String id, String userName, String inmageURL) {
+    public User(String id, String userName, int inmageURL) {
         this.id = id;
         this.userName = userName;
         this.inmageURL = inmageURL;
@@ -30,11 +30,11 @@ public class User {
         this.userName = userName;
     }
 
-    public String getInmageURL() {
+    public int getInmageURL() {
         return inmageURL;
     }
 
-    public void setInmageURL(String inmageURL) {
+    public void setInmageURL(int inmageURL) {
         this.inmageURL = inmageURL;
     }
 }

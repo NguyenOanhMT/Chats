@@ -1,4 +1,4 @@
-package com.nguyenoanh.chats;
+package com.nguyenoanh.chats.Activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,8 +26,10 @@ import com.google.firebase.database.ValueEventListener;
 import com.nguyenoanh.chats.Fragments.ChatFragment;
 import com.nguyenoanh.chats.Fragments.UserFragment;
 import com.nguyenoanh.chats.Model.User;
+import com.nguyenoanh.chats.R;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -61,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
                 userName.setText(user.getUserName());
-                if(user.getInmageURL().equals("default")){
+                if(Objects.equals (user.getInmageURL (), "default")){
                     profileImage.setImageResource(R.drawable.anh1);
                 }else{
                     Glide.with(MainActivity.this).load(user.getInmageURL()).into(profileImage);

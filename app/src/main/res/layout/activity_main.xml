@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroudmain"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".Activity.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -28,7 +28,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/tvUserName"
                 android:layout_marginLeft="@dimen/dp20"
-                tools:text="@string/name"
+                tools:text="User name"
+                android:text="User name"
                 style="@style/TextStyle10"/>
         </android.support.v7.widget.Toolbar>
 
