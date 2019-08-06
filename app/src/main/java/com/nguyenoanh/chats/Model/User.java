@@ -2,12 +2,12 @@ package com.nguyenoanh.chats.Model;
 
 public class User {
     private String id;
-    private String userName;
-    private int inmageURL;
+    private String username;
+    private String inmageURL;
 
-    public User(String id, String userName, int inmageURL) {
+    public User(String id, String username, String inmageURL) {
         this.id = id;
-        this.userName = userName;
+        this.username = username;
         this.inmageURL = inmageURL;
     }
 
@@ -23,18 +23,18 @@ public class User {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUserName(String username) {
+        this.username = username;
     }
 
-    public int getInmageURL() {
+    public String getInmageURL() {
         return inmageURL;
     }
 
-    public void setInmageURL(int inmageURL) {
+    public void setInmageURL(String inmageURL) {
         this.inmageURL = inmageURL;
     }
 }

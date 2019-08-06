@@ -51,7 +51,7 @@ public class Login extends AppCompatActivity {
                 String edtPass = password.getText().toString();
 
                 if (TextUtils.isEmpty(edtEmail) || TextUtils.isEmpty(edtPass)) {
-                    Toast.makeText(Login.this, "All fileds are required", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Login.this, "All fill are required", Toast.LENGTH_SHORT).show();
                 }else
                     auth.signInWithEmailAndPassword(edtEmail,edtPass)
                             .addOnCompleteListener(new OnCompleteListener<AuthResult>() {

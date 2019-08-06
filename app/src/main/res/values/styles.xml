@@ -65,7 +65,7 @@
         <item name="android:textColor">@color/colorBlack</item>
     </style>
     <style name="TextStyle10">
-        <item name="android:textSize">12sp</item>
+        <item name="android:textSize">17sp</item>
         <item name="android:fontFamily">sans-serif</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">#b8e986</item>

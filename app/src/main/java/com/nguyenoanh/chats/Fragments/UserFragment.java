@@ -31,7 +31,8 @@ public class UserFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        ArrayList<User> listUser = new ArrayList<> ();
+
+
         View view =  inflater.inflate (R.layout.fragment_user, container, false);
 
         recyclerView = view.findViewById (R.id.recycler_view_user);
@@ -39,6 +40,7 @@ public class UserFragment extends Fragment {
         LinearLayoutManager layoutManager = new LinearLayoutManager (getContext ());
         recyclerView.setLayoutManager (layoutManager);
 
+        listUser = new ArrayList<> ();
         readUsers();
 
         return view;
@@ -56,6 +58,8 @@ public class UserFragment extends Fragment {
                 for (DataSnapshot snapshot: dataSnapshot.getChildren ()){
                     User user = snapshot.getValue (User.class);
 
+                    assert user != null;
+                    assert firebaseUser != null;
                     if(!user.getId ().equals (firebaseUser.getUid ())){
                         listUser.add (user);
                     }

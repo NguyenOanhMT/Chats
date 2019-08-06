@@ -29,14 +29,13 @@ import com.nguyenoanh.chats.Model.User;
 import com.nguyenoanh.chats.R;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
 
     CircleImageView profileImage;
-    TextView userName;
+    TextView username;
 
     FirebaseUser firebaseUser;
     DatabaseReference reference;
@@ -51,22 +50,25 @@ public class MainActivity extends AppCompatActivity {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Chats");
+        getSupportActionBar ().setDisplayHomeAsUpEnabled (true);
 
         profileImage = findViewById(R.id.profileImage);
-        userName =(TextView) findViewById(R.id.tvUserName);
+        username =(TextView) findViewById(R.id.tvUserName);
 
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("User").child(firebaseUser.getUid());
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(firebaseUser.getUid());
 
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User user = dataSnapshot.getValue(User.class);
-                userName.setText(user.getUserName());
-                if(Objects.equals (user.getInmageURL (), "default")){
+                username.setText(user.getUserName());
+
+                if (user.getInmageURL ().equals ("default")){
                     profileImage.setImageResource(R.drawable.anh1);
                 }else{
-                    Glide.with(MainActivity.this).load(user.getInmageURL()).into(profileImage);
+                    Glide.with(MainActivity.this).load(user.getInmageURL())
+                            .into(profileImage);
                 }
             }
 
@@ -75,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        // create 2 fragment chats and user in activity main
         TabLayout tabLayout = (TabLayout) findViewById (R.id.tab_layout);
         ViewPager viewPager = (ViewPager) findViewById (R.id.view_pager);
 
@@ -85,7 +89,6 @@ public class MainActivity extends AppCompatActivity {
         viewPager.setAdapter (viewPagerAdapter);
 
         tabLayout.setupWithViewPager (viewPager);
-
     }
 
     @Override

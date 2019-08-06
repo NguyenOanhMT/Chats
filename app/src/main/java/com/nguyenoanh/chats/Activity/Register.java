@@ -24,7 +24,7 @@ import java.util.HashMap;
 
 public class Register extends AppCompatActivity {
 
-    EditText userName;
+    EditText username;
     EditText email;
     EditText password;
     EditText confirm;
@@ -47,7 +47,7 @@ public class Register extends AppCompatActivity {
         getSupportActionBar().setTitle("Register");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        userName =(EditText) findViewById(R.id.edtName);
+        username =(EditText) findViewById(R.id.edtName);
         email =(EditText) findViewById(R.id.edtEmail);
         password =(EditText) findViewById(R.id.edtPass);
         confirm =(EditText) findViewById(R.id.edtConfirmPass);
@@ -58,14 +58,14 @@ public class Register extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String edtUsername = userName.getText().toString();
+                String edtUsername = username.getText().toString();
                 String edtEmail = email.getText().toString();
                 String edtPass = password.getText().toString();
                 String edtConfirm = confirm.getText().toString();
 
                 if ((TextUtils.isEmpty(edtUsername) || TextUtils.isEmpty(edtEmail)
                         || TextUtils.isEmpty(edtPass)) && edtConfirm.equals(edtPass)){
-                    Toast.makeText(Register.this, "All fileds are required", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Register.this, "All fill are required", Toast.LENGTH_SHORT).show();
                 }else if(edtPass.length() < 8)
                     Toast.makeText(Register.this, "Pass least 8 character ", Toast.LENGTH_SHORT).show();
                 else
@@ -85,7 +85,7 @@ public class Register extends AppCompatActivity {
                             String userid = firebaseUser.getUid();
 
 
-                            reference = FirebaseDatabase.getInstance().getReference("User").child(userid);
+                            reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
                             HashMap<String, String> hashMap = new HashMap<>();
                             hashMap.put("id",userid);
@@ -109,7 +109,6 @@ public class Register extends AppCompatActivity {
                     }
 
                 });
-
         auth.addAuthStateListener(authLinear);
     }
 
