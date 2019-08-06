@@ -19,7 +19,6 @@ public class StartActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-
         firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         //check if user is null change activity
@@ -41,7 +40,7 @@ public class StartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(StartActivity.this,  Login.class);
                 startActivity(intent);
-                //   finish();
+                finish();
             }
         });
 
@@ -51,7 +50,7 @@ public class StartActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(StartActivity.this,  Register.class);
                 startActivity(intent);
-                //  finish();
+                finish();
             }
         });
     }

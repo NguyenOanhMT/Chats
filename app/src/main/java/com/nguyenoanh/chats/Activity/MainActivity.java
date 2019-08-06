@@ -15,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -49,7 +48,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
 
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Chats");
+        getSupportActionBar().setTitle("");
         getSupportActionBar ().setDisplayHomeAsUpEnabled (true);
 
         profileImage = findViewById(R.id.profileImage);
@@ -64,12 +63,12 @@ public class MainActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUserName());
 
-                if (user.getInmageURL ().equals ("default")){
+//                if (user.getInmageURL ().equals ("default")){
                     profileImage.setImageResource(R.drawable.anh1);
-                }else{
-                    Glide.with(MainActivity.this).load(user.getInmageURL())
-                            .into(profileImage);
-                }
+//                }else{
+//                    Glide.with(MainActivity.this).load(user.getInmageURL())
+//                            .into(profileImage);
+//                }
             }
 
             @Override
