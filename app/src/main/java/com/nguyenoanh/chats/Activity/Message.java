@@ -78,6 +78,7 @@ public class Message extends AppCompatActivity {
         final String userid = intent.getStringExtra ("userid");
         firebaseUser = FirebaseAuth.getInstance ().getCurrentUser ();
 
+        // handling event on click button Send
         btnSend.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick(View v) {
@@ -102,7 +103,7 @@ public class Message extends AppCompatActivity {
                 username.setText (user.getUserName ());
 
 //                if(user.getInmageURL ().equals ("default")){
-                    profileImage.setImageResource (R.drawable.anh1);
+                    profileImage.setImageResource (R.drawable.anh);
 //                }else {
 //                    Glide.with (Message.this).load(user.getInmageURL ())
 //                            .into(profileImage);
@@ -118,6 +119,7 @@ public class Message extends AppCompatActivity {
         });
     }
 
+    //send data message on database
     private void sendMessage(String sender, String receiver, String message){
         DatabaseReference reference = FirebaseDatabase.getInstance ().getReference ();
 
@@ -129,6 +131,7 @@ public class Message extends AppCompatActivity {
         reference.child ("Chats").push().setValue (hashMap);
     }
 
+    //read message on real time database
     private void readMessage(final String myid, final String userid, final String imagurl){
         listChat = new ArrayList<> ();
         reference = FirebaseDatabase.getInstance ().getReference ("Chats");

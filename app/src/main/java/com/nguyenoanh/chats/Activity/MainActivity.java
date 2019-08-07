@@ -23,6 +23,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.nguyenoanh.chats.Fragments.ChatFragment;
+import com.nguyenoanh.chats.Fragments.ProfileFragment;
 import com.nguyenoanh.chats.Fragments.UserFragment;
 import com.nguyenoanh.chats.Model.User;
 import com.nguyenoanh.chats.R;
@@ -77,13 +78,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // create 2 fragment chats and user in activity main
+        // create 2 fragment chats and users in activity main
         TabLayout tabLayout = (TabLayout) findViewById (R.id.tab_layout);
         ViewPager viewPager = (ViewPager) findViewById (R.id.view_pager);
 
         ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter (getSupportFragmentManager ());
         viewPagerAdapter.addFragment (new ChatFragment (), "Chats");
         viewPagerAdapter.addFragment (new UserFragment (), "Users");
+        viewPagerAdapter.addFragment (new ProfileFragment (), "Profile");
 
         viewPager.setAdapter (viewPagerAdapter);
 

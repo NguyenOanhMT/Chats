@@ -13,7 +13,7 @@
     </style>
 
     <style name="TextStyle">
-        <item name="android:textSize">30sp</item>
+        <item name="android:textSize">20sp</item>
         <item name="android:letterSpacing">0.08</item>
         <item name="android:textColor">@color/colorDodger_blue</item>
     </style>

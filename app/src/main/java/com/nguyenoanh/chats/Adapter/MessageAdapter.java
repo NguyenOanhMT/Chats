@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHolder> {
+
     public static final int MSG_TYPE_LEFT = 0;
     public static final int MSG_TYPE_RIGHT = 1;
 
@@ -35,12 +36,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     @NonNull
     @Override
     public MessageAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        LayoutInflater inflater = (LayoutInflater) LayoutInflater.from (context);
-
+        LayoutInflater inflater = LayoutInflater.from (context);
         if(viewType == MSG_TYPE_RIGHT) {
             View view = inflater.inflate (R.layout.item_chat_right, null);
             return new MessageAdapter.ViewHolder (view);
-        }else {
+        }else{
             View view = inflater.inflate (R.layout.item_chat_left, null);
             return new MessageAdapter.ViewHolder (view);
         }
@@ -51,10 +51,22 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         Chat chat = listChat.get (i);
 
-        holder.showMess.setText (chat.getMessage ());
+        switch (holder.getItemViewType ()){
+            case 0:
+                holder.showMess.setText (chat.getMessage ());
+                holder.profileImage.setImageResource (R.drawable.anh1);
+                break;
+            case 1:
+                holder.showMess.setText (chat.getMessage ());
+                break;
+            default:
+                break;
+
+        }
+//        holder.showMess.setText (chat.getMessage ());
 
 //        if(user.getInmageURL ().equals ("default"))
-        holder.profileImage.setImageResource (R.drawable.anh1);
+//        holder.profileImage.setImageResource (R.drawable.anh1);
 //        else{
 //            Glide.with(context).load (user.getInmageURL ()).into (holder.profileImage);
 //        }
