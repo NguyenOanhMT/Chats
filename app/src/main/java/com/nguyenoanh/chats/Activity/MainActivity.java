@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -64,12 +65,12 @@ public class MainActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUserName());
 
-//                if (user.getInmageURL ().equals ("default")){
-                    profileImage.setImageResource(R.drawable.anh1);
-//                }else{
-//                    Glide.with(MainActivity.this).load(user.getInmageURL())
-//                            .into(profileImage);
-//                }
+                if (user.getImageURL ().equals ("default")){
+                    profileImage.setImageResource(R.drawable.anh);
+                }else{
+                    Glide.with(MainActivity.this).load(user.getImageURL())
+                            .into(profileImage);
+                }
             }
 
             @Override

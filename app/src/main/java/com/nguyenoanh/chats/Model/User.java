@@ -3,12 +3,12 @@ package com.nguyenoanh.chats.Model;
 public class User {
     private String id;
     private String username;
-    private String inmageURL;
+    private String imageURL;
 
-    public User(String id, String username, String inmageURL) {
+    public User(String id, String username, String imageURL) {
         this.id = id;
         this.username = username;
-        this.inmageURL = inmageURL;
+        this.imageURL = imageURL;
     }
 
     public User() {
@@ -30,11 +30,11 @@ public class User {
         this.username = username;
     }
 
-    public String getInmageURL() {
-        return inmageURL;
+    public String getImageURL() {
+        return imageURL;
     }
 
-    public void setInmageURL(String inmageURL) {
-        this.inmageURL = inmageURL;
+    public void setImageURL(String inmageURL) {
+        this.imageURL = inmageURL;
     }
 }

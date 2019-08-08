@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -102,14 +103,15 @@ public class Message extends AppCompatActivity {
 
                 username.setText (user.getUserName ());
 
-//                if(user.getInmageURL ().equals ("default")){
+                String url = user.getImageURL();
+                if (url != null && url.equals("default")) {
                     profileImage.setImageResource (R.drawable.anh);
-//                }else {
-//                    Glide.with (Message.this).load(user.getInmageURL ())
-//                            .into(profileImage);
-//                }
+                }else {
+                    Glide.with (Message.this).load(user.getImageURL ())
+                            .into(profileImage);
+                }
 
-                readMessage (firebaseUser.getUid (), userid, user.getInmageURL ());
+                readMessage (firebaseUser.getUid (), userid, user.getImageURL ());
             }
 
             @Override

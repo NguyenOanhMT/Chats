@@ -54,7 +54,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         switch (holder.getItemViewType ()){
             case 0:
                 holder.showMess.setText (chat.getMessage ());
-                holder.profileImage.setImageResource (R.drawable.anh1);
+                holder.profileImage.setImageResource (R.drawable.anh);
                 break;
             case 1:
                 holder.showMess.setText (chat.getMessage ());

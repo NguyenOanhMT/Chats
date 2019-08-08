@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.nguyenoanh.chats.Activity.Message;
 import com.nguyenoanh.chats.Model.User;
 import com.nguyenoanh.chats.R;
@@ -41,11 +42,12 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
         holder.tvUser.setText (user.getUserName ());
 
-//        if(user.getInmageURL ().equals ("default"))
-            holder.profileImage.setImageResource (R.drawable.anh1);
-//        else{
-//            Glide.with(context).load (user.getInmageURL ()).into (holder.profileImage);
-//        }
+        String url = user.getImageURL();
+        if (url != null && url.equals("default")) {
+            holder.profileImage.setImageResource (R.drawable.anh);
+        }else{
+            Glide.with(context).load (user.getImageURL ()).into (holder.profileImage);
+        }
 
         // check event click item_user move activity message
         holder.itemView.setOnClickListener (new View.OnClickListener () {
