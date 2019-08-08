@@ -30,6 +30,7 @@ import com.nguyenoanh.chats.Model.User;
 import com.nguyenoanh.chats.R;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -104,7 +105,10 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
-                startActivity(new Intent(MainActivity.this, StartActivity.class));
+
+                //change this code because your app will crash
+                startActivity(new Intent(MainActivity.this, StartActivity.class)
+                        .setFlags (Intent.FLAG_ACTIVITY_CLEAR_TOP));
                 return true;
         }
         return false;
@@ -135,10 +139,35 @@ public class MainActivity extends AppCompatActivity {
             titles.add (title);
         }
 
+        // put title page
         @Nullable
         @Override
         public CharSequence getPageTitle(int i) {
             return titles.get (i);
         }
+    }
+
+    // check status of user
+    private void status(String status){
+        reference = FirebaseDatabase.getInstance ().getReference ("Users").child (firebaseUser.getUid ());
+
+        HashMap<String, Object> hashMap = new HashMap<> ();
+        hashMap.put ("status", status);
+
+        reference.updateChildren (hashMap);
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume ();
+
+        status ("online");
+    }
+
+    @Override
+    protected void onPause(){
+        super.onPause ();
+
+        status ("offline");
     }
 }

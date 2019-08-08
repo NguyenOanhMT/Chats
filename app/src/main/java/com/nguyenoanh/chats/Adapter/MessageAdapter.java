@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.nguyenoanh.chats.Model.Chat;
@@ -54,7 +55,11 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         switch (holder.getItemViewType ()){
             case 0:
                 holder.showMess.setText (chat.getMessage ());
-                holder.profileImage.setImageResource (R.drawable.anh);
+                if (imageURL.equals("default")){
+                    holder.profileImage.setImageResource(R.drawable.anh);
+                } else {
+                    Glide.with(context).load(imageURL).into(holder.profileImage);
+                }
                 break;
             case 1:
                 holder.showMess.setText (chat.getMessage ());
@@ -63,14 +68,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                 break;
 
         }
-//        holder.showMess.setText (chat.getMessage ());
-
-//        if(user.getInmageURL ().equals ("default"))
-//        holder.profileImage.setImageResource (R.drawable.anh1);
-//        else{
-//            Glide.with(context).load (user.getInmageURL ()).into (holder.profileImage);
-//        }
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

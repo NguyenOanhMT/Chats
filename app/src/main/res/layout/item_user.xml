@@ -1,22 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imv_avatar"
+        android:id="@+id/profileImage"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="@dimen/dp10"
         android:padding="@dimen/dp10"
         android:src="@drawable/anh1" />
+
     <TextView
         android:id="@+id/tv_name"
+        style="@style/TextStyle6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_vertical"
-        style="@style/TextStyle6"
+        android:layout_toRightOf="@id/profileImage"
+        android:layout_toEndOf="@id/profileImage"
+        android:layout_marginLeft="10dp"
+        android:layout_centerVertical="true"
         android:text="User name"/>
-</LinearLayout>
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imv_on"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:visibility="gone"
+        android:layout_alignBottom="@+id/profileImage"
+        android:layout_marginStart="-30dp"
+        android:layout_marginLeft="-30dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="9dp"
+        android:layout_toEndOf="@id/profileImage"
+        android:layout_toRightOf="@id/profileImage"
+        app:civ_border_color="#04FC0F"
+        app:civ_border_width="10dp" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imv_off"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:visibility="gone"
+        android:layout_alignBottom="@+id/profileImage"
+        android:layout_marginStart="-30dp"
+        android:layout_marginLeft="-30dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginBottom="9dp"
+        android:layout_toEndOf="@id/profileImage"
+        android:layout_toRightOf="@id/profileImage"
+        app:civ_border_color="#bfbfbf"
+        app:civ_border_width="10dp" />
+
+</RelativeLayout>

@@ -50,7 +50,6 @@ public class ChatFragment extends Fragment {
         userList = new ArrayList<> ();
 
         reference = FirebaseDatabase.getInstance ().getReference ("Chats");
-
         reference.addValueEventListener (new ValueEventListener () {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -86,12 +85,12 @@ public class ChatFragment extends Fragment {
         reference.addValueEventListener (new ValueEventListener () {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                list.clear ();
                 userList.clear ();
 
                 // display 1 user from chats
                 for(DataSnapshot snapshot : dataSnapshot.getChildren () ){
                     User user = snapshot.getValue (User.class);
-
                     for (String id: userList){
                         if(user.getId ().equals (id)){
                             if(list.size () != 0){
@@ -106,7 +105,7 @@ public class ChatFragment extends Fragment {
                         }
                     }
                 }
-                userAdapter = new UserAdapter (getContext (), list);
+                userAdapter = new UserAdapter (getContext (), list, true);
                 recyclerView.setAdapter (userAdapter);
             }
 

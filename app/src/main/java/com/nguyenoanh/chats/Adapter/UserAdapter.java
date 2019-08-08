@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -21,10 +22,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     private Context context;
     private ArrayList<User> listUser;
+    private boolean isChat;
 
-    public UserAdapter(Context context, ArrayList<User> listUser) {
+
+    public UserAdapter(Context context, ArrayList<User> listUser, boolean isChat) {
         this.context = context;
         this.listUser = listUser;
+        this.isChat = isChat;
     }
 
     @NonNull
@@ -49,6 +53,19 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             Glide.with(context).load (user.getImageURL ()).into (holder.profileImage);
         }
 
+        if(isChat){
+            if(user.getStatus ().equals ("online")){
+                holder.imvOn.setVisibility (View.VISIBLE);
+                holder.imvOff.setVisibility (View.GONE);
+            }else {
+                holder.imvOn.setVisibility (View.GONE);
+                holder.imvOff.setVisibility (View.VISIBLE);
+            }
+        }else {
+            holder.imvOn.setVisibility (View.GONE);
+            holder.imvOff.setVisibility (View.GONE);
+        }
+
         // check event click item_user move activity message
         holder.itemView.setOnClickListener (new View.OnClickListener () {
             @Override
@@ -64,12 +81,16 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
     public class ViewHolder extends RecyclerView.ViewHolder{
         public CircleImageView profileImage;
         public TextView tvUser;
+        private ImageView imvOn, imvOff;
 
         public ViewHolder(@NonNull View itemView) {
             super (itemView);
 
-            profileImage = (CircleImageView) itemView.findViewById (R.id.imv_avatar);
+            profileImage = (CircleImageView) itemView.findViewById (R.id.profileImage);
             tvUser = (TextView) itemView.findViewById (R.id.tv_name);
+
+            imvOn = (ImageView) itemView.findViewById (R.id.imv_on);
+            imvOff = (ImageView) itemView.findViewById (R.id.imv_off);
         }
     }
 
