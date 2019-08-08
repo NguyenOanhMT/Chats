@@ -66,10 +66,11 @@ public class MainActivity extends AppCompatActivity {
                 User user = dataSnapshot.getValue(User.class);
                 username.setText(user.getUserName());
 
-                if (user.getImageURL ().equals ("default")){
+                String url = user.getImageURL ();
+                if (url != null && url.equals ("default")){
                     profileImage.setImageResource(R.drawable.anh);
                 }else{
-                    Glide.with(MainActivity.this).load(user.getImageURL())
+                    Glide.with(getApplicationContext()).load(user.getImageURL())
                             .into(profileImage);
                 }
             }
