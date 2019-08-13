@@ -53,6 +53,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
             Glide.with(context).load (user.getImageURL ()).into (holder.profileImage);
         }
 
+        // check user online or offline
         if(isChat){
             if(user.getStatus ().equals ("online")){
                 holder.imvOn.setVisibility (View.VISIBLE);

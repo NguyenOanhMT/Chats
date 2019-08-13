@@ -53,6 +53,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         Chat chat = listChat.get (i);
 
         switch (holder.getItemViewType ()){
+
             case 0:
                 holder.showMess.setText (chat.getMessage ());
                 if (imageURL.equals("default")){
@@ -60,9 +61,27 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                 } else {
                     Glide.with(context).load(imageURL).into(holder.profileImage);
                 }
+                if (i == (listChat.size ()-1)){
+                    if(chat.isIsseen ()){
+                        holder.tvSeen.setText ("Seen");
+                    }else {
+                        holder.tvSeen.setText ("Not seen");
+                    }
+                }else {
+                    holder.tvSeen.setVisibility (View.GONE);
+                }
                 break;
             case 1:
                 holder.showMess.setText (chat.getMessage ());
+                if (i == (listChat.size ()-1)){
+                    if(chat.isIsseen ()){
+                        holder.tvSeen.setText ("Seen");
+                    }else {
+                        holder.tvSeen.setText ("Not seen");
+                    }
+                }else {
+                    holder.tvSeen.setVisibility (View.GONE);
+                }
                 break;
             default:
                 break;
@@ -72,13 +91,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         public CircleImageView profileImage;
-        public TextView showMess;
+        public TextView showMess, tvSeen;
 
         public ViewHolder(@NonNull View itemView) {
             super (itemView);
 
             profileImage = (CircleImageView) itemView.findViewById (R.id.profileImage);
             showMess = (TextView) itemView.findViewById (R.id.show_mess);
+            tvSeen = (TextView) itemView.findViewById (R.id.tv_time_seen);
         }
     }
 

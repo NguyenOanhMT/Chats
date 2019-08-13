@@ -47,6 +47,7 @@ public class Message extends AppCompatActivity {
     DatabaseReference reference;
 
     Intent intent;
+    ValueEventListener seenListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,7 +116,7 @@ public class Message extends AppCompatActivity {
                 if (url != null && url.equals("default")) {
                     profileImage.setImageResource (R.drawable.anh);
                 }else {
-                    Glide.with (Message.this).load(user.getImageURL ())
+                    Glide.with (getApplicationContext ()).load(user.getImageURL ())
                             .into(profileImage);
                 }
 
@@ -127,9 +128,41 @@ public class Message extends AppCompatActivity {
 
             }
         });
+
+        seenMessage (userid);
     }
 
-    //send data message on database
+    private void seenMessage(final String userid){
+        reference = FirebaseDatabase.getInstance ().getReference ("Chats");
+        seenListener = reference.addValueEventListener (new ValueEventListener () {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot snapshot : dataSnapshot.getChildren ()){
+                    Chat chat = snapshot.getValue (Chat.class);
+
+                    if(chat.getReceiver ().equals (firebaseUser.getUid ()) && chat.getSender ().equals (userid)){
+                        HashMap<String, Object> hashMap = new HashMap<> ();
+                        hashMap.put ("isseen", true);
+                        snapshot.getRef ().updateChildren (hashMap);
+                    }
+
+                    messageAdapter = new MessageAdapter (Message.this, listChat, userid);
+                    recyclerView.setAdapter (messageAdapter);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+
+
+            //send data message on database
     private void sendMessage(String sender, String receiver, String message){
         DatabaseReference reference = FirebaseDatabase.getInstance ().getReference ();
 
@@ -137,6 +170,7 @@ public class Message extends AppCompatActivity {
         hashMap.put ("sender", sender);
         hashMap.put ("receiver", receiver);
         hashMap.put ("message", message);
+        hashMap.put ("isseen", false);
 
         reference.child ("Chats").push().setValue (hashMap);
     }
@@ -190,7 +224,7 @@ public class Message extends AppCompatActivity {
     @Override
     protected void onPause(){
         super.onPause ();
-
+        reference.removeEventListener (seenListener);
         status ("offline");
     }
 }
