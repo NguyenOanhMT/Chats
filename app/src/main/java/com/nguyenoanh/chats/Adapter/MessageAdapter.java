@@ -53,7 +53,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
         Chat chat = listChat.get (i);
 
         switch (holder.getItemViewType ()){
-
             case 0:
                 holder.showMess.setText (chat.getMessage ());
                 if (imageURL.equals("default")){
@@ -85,7 +84,6 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                 break;
             default:
                 break;
-
         }
     }
 

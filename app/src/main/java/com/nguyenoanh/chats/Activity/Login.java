@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -21,6 +22,7 @@ public class Login extends AppCompatActivity {
 
     EditText email;
     EditText password;
+    TextView tvForgotPass;
 
     Button btnLogin;
 
@@ -66,6 +68,15 @@ public class Login extends AppCompatActivity {
                                         Toast.makeText(Login.this, "Auth failed", Toast.LENGTH_SHORT).show();
                                 }
                             });
+            }
+        });
+
+        tvForgotPass = (TextView) findViewById (R.id.tvForgetPass);
+        tvForgotPass.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent (Login.this, ResetPass.class);
+                startActivity (intent);
             }
         });
     }
